@@ -1,0 +1,280 @@
+/* Center Mission, Vision, Promise descriptions on mobile only */
+.aboutus-desc-mobile-center {
+  text-align: left;
+}
+@media (max-width: 600px) {
+  .aboutus-desc-mobile-center {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: block !important;
+  }
+}
+/* Center Mission, Vision, Promise sections on mobile only */
+.aboutus-section-mobile-center {
+  align-items: flex-start !important;
+  text-align: left;
+}
+@media (max-width: 600px) {
+  .aboutus-section-mobile-center {
+    align-items: center !important;
+    text-align: center !important;
+    flex-direction: column !important;
+  }
+  .aboutus-section-mobile-center > div,
+  .aboutus-section-mobile-center h2,
+  .aboutus-section-mobile-center p {
+    text-align: center !important;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
+}
+/* Center Aboutus left content and CTA only on mobile */
+/* Center Aboutus left content and CTA only on mobile, with !important to override Tailwind */
+.aboutus-content-mobile-center {
+  align-items: flex-start !important;
+  text-align: left;
+}
+@media (max-width: 600px) {
+  .aboutus-content-mobile-center {
+    align-items: center !important;
+    text-align: center !important;
+  }
+  .aboutus-content-mobile-center h2,
+  .aboutus-content-mobile-center p,
+  .aboutus-content-mobile-center button {
+    text-align: center !important;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
+}
+/* Always keep director's note dots horizontal */
+.director-note-dots-row {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: auto !important;
+  min-width: 0 !important;
+}
+@media (max-width: 600px) {
+  .director-note-flex-mobile {
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+  }
+  .director-note-flex-mobile > div {
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+  }
+}
+/* Center director's note only on mobile */
+.director-note-responsive {
+  text-align: left;
+  align-items: flex-start;
+}
+@media (max-width: 600px) {
+  .director-note-responsive {
+    text-align: center !important;
+    align-items: center !important;
+  }
+  .director-note-responsive > div {
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+  }
+  .director-note-responsive h2,
+  .director-note-responsive p {
+    text-align: center !important;
+    width: 100% !important;
+  }
+}
+/* Center Contact Us only on mobile */
+.contactus-mobile-center {
+  align-items: flex-start;
+}
+.contactus-mobile-center-text {
+  text-align: left;
+}
+@media (max-width: 600px) {
+  .contactus-mobile-center {
+    align-items: center !important;
+  }
+  .contactus-mobile-center-text {
+    text-align: center !important;
+    width: 100%;
+  }
+}
+/* Responsive center alignment for blog header on mobile */
+.blog-header-responsive {
+  /* Default: no override, keep flex as is for desktop */
+}
+
+@media (max-width: 600px) {
+  .blog-header-responsive > div {
+    align-items: center !important;
+    text-align: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+  }
+  .blog-header-responsive .flex {
+    align-items: center !important;
+    justify-content: center !important;
+    flex-direction: column !important;
+    width: 100% !important;
+  }
+  .blog-header-responsive h1,
+  .blog-header-responsive p {
+    text-align: center !important;
+    width: 100% !important;
+  }
+}
+/* Responsive center alignment for about-us intro on mobile */
+.aboutus-intro-responsive {
+  /* Default: no override, keep flex as is for desktop */
+}
+
+@media (max-width: 600px) {
+  .aboutus-intro-responsive {
+    align-items: center !important;
+    text-align: center;
+  }
+  .aboutus-intro-responsive > div {
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  .aboutus-intro-responsive h2,
+  .aboutus-intro-responsive p {
+    text-align: center !important;
+  }
+}
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.6s ease-out forwards;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.8s ease-out forwards;
+}
+
+.animate-slide-in-from-right {
+  animation: slideInFromRight 0.8s ease-out forwards;
+}
+
+/* Initial hidden states for scroll-triggered animations */
+.slide-in-left-hidden {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.slide-in-right-hidden {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+.slide-in-left-visible {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.slide-in-right-visible {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
