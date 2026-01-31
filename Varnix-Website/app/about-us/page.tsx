@@ -9,7 +9,8 @@ import Aboutus from "@/components/Aboutus";
 const Page = () => {
   const [isVisible, setIsVisible] = useState<{ [key: string]: boolean }>({});
   const sectionRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
- // Director state for Director's Note section
+  
+  // Director state for Director's Note section
   const [activeDirector, setActiveDirector] = useState(0);
 
   const directors = [
@@ -28,6 +29,16 @@ const Page = () => {
       note: "Director's note",
     },
   ];
+
+  // --- AUTOMATIC SLIDER SYNC ---
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveDirector((prev) => (prev === directors.length - 1 ? 0 : prev + 1));
+    }, 5000); // 5 seconds for a smooth read
+
+    return () => clearInterval(interval);
+  }, [directors.length]);
+
   useEffect(() => {
     const observers: IntersectionObserver[] = [];
 
@@ -84,10 +95,10 @@ const Page = () => {
 
             <div className="flex-1 space-y-4 md:space-y-6">
               <p className="text-sm sm:text-base md:text-lg lg:text-xl text-black leading-relaxed transition-all duration-700 delay-300">
-              Varnix is more than a media and marketing agency—we’re a collective of strategists, creators, technologists, and storytellers turning brands into cultural forces. In today’s attention-driven world, we help brands capture interest, sustain relevance, and convert attention into measurable growth. From brand building and viral content to performance marketing, PR, digital transformation, and AI-powered storytelling, everything we do serves one goal: making your brand unforgettable.
+                Varnix is more than a media and marketing agency—we’re a collective of strategists, creators, technologists, and storytellers turning brands into cultural forces. In today’s attention-driven world, we help brands capture interest, sustain relevance, and convert attention into measurable growth. From brand building and viral content to performance marketing, PR, digital transformation, and AI-powered storytelling, everything we do serves one goal: making your brand unforgettable.
               </p>
               <p className="text-sm sm:text-base md:text-lg lg:text-xl text-black leading-relaxed transition-all duration-700 delay-400">
-              We believe marketing isn’t about selling products—it’s about creating experiences, building communities, and inspiring action. We’re not just your agency; we’re your extended creative and growth team.
+                We believe marketing isn’t about selling products—it’s about creating experiences, building communities, and inspiring action. We’re not just your agency; we’re your extended creative and growth team.
               </p>
             </div>
           </div>
@@ -128,7 +139,6 @@ brands to communicate with authenticity and purpose. We help businesses scale fe
 combining strategy, creativity, and technology to create meaningful connections in an ever-evolving
 digital world.
               </p>
-              
             </div>
           </div>
 
@@ -139,7 +149,6 @@ digital world.
 campaigns into lasting conversations. By pushing boundaries and embracing innovation, we aim to turn
 brands into cultural symbols that leave a lasting legacy across industries and markets.
               </p>
-            
             </div>
             <div ref={setRef("vision-heading")} className={`shrink-0 w-full md:w-2/5 order-1 md:order-none ${isVisible["vision-heading"] ? "slide-in-right-visible" : "slide-in-right-hidden"}`} style={{ transitionDelay: '0.1s' }}>
               <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight text-center mx-auto md:text-left md:mx-0">
@@ -164,7 +173,6 @@ brands into cultural symbols that leave a lasting legacy across industries and m
 is custom-built, insight-driven, and culturally relevant—designed to grow with your brand, adapt to
 change, and deliver long-term impact.
               </p>
-            
             </div>
             <div ref={setRef("promise-heading")} className={`shrink-0 w-full md:w-2/5 order-1 md:order-none ${isVisible["promise-heading"] ? "slide-in-left-visible" : "slide-in-left-hidden"}`} style={{ transitionDelay: '0.1s' }}>
               <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight text-center mx-auto md:text-left md:mx-0">
@@ -239,8 +247,15 @@ change, and deliver long-term impact.
                 </div>
 
                 <div className="flex flex-row gap-2 mt-6 justify-center w-full director-note-dots-row">
-                  <div className={`w-2 h-2 rounded-full ${activeDirector === 0 ? "bg-pink-500" : "bg-black"} hover:bg-pink-500 transition-colors duration-300 cursor-pointer`} onClick={() => setActiveDirector(0)}></div>
-                  <div className={`w-2 h-2 rounded-full ${activeDirector === 1 ? "bg-pink-500" : "bg-black"} hover:bg-pink-500 transition-colors duration-300 cursor-pointer`} onClick={() => setActiveDirector(1)}></div>
+                  {directors.map((_, index) => (
+                    <div 
+                      key={index}
+                      className={`w-2 h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                        activeDirector === index ? "bg-pink-500 scale-125" : "bg-black"
+                      } hover:bg-pink-500`} 
+                      onClick={() => setActiveDirector(index)}
+                    ></div>
+                  ))}
                 </div>
               </div>
             </div>

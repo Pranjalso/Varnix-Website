@@ -1,13 +1,14 @@
-
-
 'use client';
 import React, { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation"; // Added for active link detection
 
 const Navbar = () => {
+  const pathname = usePathname(); // Get current path
   const [open, setOpen] = React.useState(false);
   const [scrolled, setScrolled] = React.useState(false);
+
   // Prevent body scroll and preserve scroll position when mobile menu is open
   useEffect(() => {
     if (open) {
@@ -31,6 +32,17 @@ const Navbar = () => {
   const toggleMenu = () => setOpen(!open);
   const closeMenu = () => setOpen(false);
 
+  // Helper function to check if path is active
+  const isActive = (path: string) => pathname === path;
+
+  const navItems = [
+    { name: "Home", href: "/" },
+    { name: "About", href: "/about-us" },
+    { name: "Our Services", href: "/our-service" },
+    { name: "Our Works", href: "/our-works" },
+    { name: "Blogs", href: "/blog" },
+  ];
+
   return (
     <>
       <nav
@@ -39,10 +51,8 @@ const Navbar = () => {
         }`}
         aria-label="Main Navigation"
       >
-        {/* CONTAINER FIX */}
         <div className="mx-auto w-full max-w-[1400px] px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 md:h-20 w-full">
-            {/* Logo always left */}
             <Link href="/" className="font-bold text-xl text-black hover:text-pink-500 transition-colors duration-300 shrink-0">
               <Image
                 src="/VARNIX.png"
@@ -56,19 +66,19 @@ const Navbar = () => {
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-5 lg:gap-7 xl:gap-8">
-              {[{ name: "Home", href: "/" },
-                { name: "About", href: "/about-us" },
-                { name: "Our Services", href: "/our-service" },
-                { name: "Our Works", href: "/our-works" },
-                { name: "Blogs", href: "/blog" },
-              ].map((item) => (
+              {navItems.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="text-base lg:text-lg text-black hover:text-pink-500 transition-colors duration-300 relative group"
+                  className={`text-base lg:text-lg transition-colors duration-300 relative group ${
+                    isActive(item.href) ? 'text-pink-500' : 'text-black hover:text-pink-500'
+                  }`}
                 >
                   {item.name}
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-pink-500 transition-all duration-300 group-hover:w-full"></span>
+                  {/* Underline remains full width if active, or animates on hover if not */}
+                  <span className={`absolute bottom-0 left-0 h-0.5 bg-pink-500 transition-all duration-300 ${
+                    isActive(item.href) ? 'w-full' : 'w-0 group-hover:w-full'
+                  }`}></span>
                 </Link>
               ))}
             </div>
@@ -76,12 +86,13 @@ const Navbar = () => {
             {/* Desktop Contact Button */}
             <Link
               href="/contact-us"
-              className="hidden md:block bg-pink-500 px-5 py-2 text-white rounded-full text-sm lg:text-base hover:bg-pink-600 transition-all duration-300 hover:scale-105 hover:shadow-lg"
+              className={`hidden md:block px-5 py-2 rounded-full text-sm lg:text-base transition-all duration-300 hover:scale-105 hover:shadow-lg ${
+                isActive("/contact-us") ? 'bg-pink-600 shadow-md' : 'bg-pink-500 hover:bg-pink-600'
+              } text-white`}
             >
               Contact Us
             </Link>
 
-            {/* Mobile Menu Button always right */}
             <button
               className="md:hidden ml-auto relative w-10 h-10 flex items-center justify-center focus:outline-none z-50"
               onClick={toggleMenu}
@@ -96,8 +107,7 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile Overlay and Menu (full screen, production quality) */}
-        {/* Smooth mobile menu animation */}
+        {/* Mobile Overlay */}
         <div
           className={`md:hidden fixed inset-0 z-[100] transition-opacity duration-300 ${open ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
           style={{ background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(4px)', touchAction: 'none' }}
@@ -110,7 +120,6 @@ const Navbar = () => {
           <div className="w-full h-full flex items-center justify-center">
             <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col transition-transform duration-300 ease-out h-[90vh] overflow-y-auto">
               <div className="flex items-center justify-between h-14 px-4 border-b border-gray-100 rounded-t-2xl bg-white/90">
-                {/* Logo left in menu */}
                 <Link href="/" className="shrink-0" onClick={closeMenu}>
                   <Image
                     src="/VARNIX.png"
@@ -121,7 +130,6 @@ const Navbar = () => {
                     priority
                   />
                 </Link>
-                {/* Close button right */}
                 <button
                   className="w-9 h-9 flex items-center justify-center focus:outline-none relative"
                   onClick={closeMenu}
@@ -133,17 +141,14 @@ const Navbar = () => {
                 </button>
               </div>
               <div className="flex-1 flex flex-col justify-center items-center space-y-4 px-4 py-4">
-                {[{ name: "Home", href: "/" },
-                  { name: "About", href: "/about-us" },
-                  { name: "Our Services", href: "/our-service" },
-                  { name: "Our Works", href: "/our-works" },
-                  { name: "Blogs", href: "/blog" },
-                ].map((item, idx) => (
+                {navItems.map((item) => (
                   <Link
                     key={item.name}
                     href={item.href}
                     onClick={closeMenu}
-                    className="block text-xl font-semibold text-black hover:text-pink-500 transition-colors duration-300 text-center tracking-wide"
+                    className={`block text-xl font-semibold transition-colors duration-300 text-center tracking-wide ${
+                      isActive(item.href) ? 'text-pink-500' : 'text-black hover:text-pink-500'
+                    }`}
                     style={{ letterSpacing: '0.01em' }}
                   >
                     {item.name}
@@ -152,7 +157,9 @@ const Navbar = () => {
                 <Link
                   href="/contact-us"
                   onClick={closeMenu}
-                  className="block w-full max-w-xs bg-pink-500 text-white text-center py-2.5 rounded-full font-medium hover:bg-pink-600 transition-colors duration-300 mt-2 text-base shadow-md"
+                  className={`block w-full max-w-xs text-white text-center py-2.5 rounded-full font-medium transition-colors duration-300 mt-2 text-base shadow-md ${
+                    isActive("/contact-us") ? 'bg-pink-600' : 'bg-pink-500 hover:bg-pink-600'
+                  }`}
                 >
                   Contact Us
                 </Link>
@@ -162,7 +169,6 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Spacer */}
       <div className="h-16 md:h-20" />
     </>
   );

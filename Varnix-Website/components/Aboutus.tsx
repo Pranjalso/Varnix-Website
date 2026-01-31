@@ -48,9 +48,9 @@ const Aboutus = () => {
             brands in the digital-first world
           </p>
 
-          <button className="bg-pink-500 px-5 py-2 text-white text-sm sm:text-base rounded-full mt-4 hover:bg-pink-600 transition">
+          {/* <button className="bg-pink-500 px-5 py-2 text-white text-sm sm:text-base rounded-full mt-4 hover:bg-pink-600 transition">
            View more
-          </button>
+          </button> */}
         </div>
 
         {/* RIGHT */}
