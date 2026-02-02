@@ -56,13 +56,13 @@ export default function Home() {
         <h1 className="text-gray-300 text-center">Professional Personal</h1>
         <h1 className="text-gray-950 text-center">Digital Marketing</h1>
           <Link href="/our-service">
-           <button className="bg-pink-500 px-5 sm:px-6 md:px-8 py-2.5 md:py-3 text-white text-sm sm:text-base md:text-lg tracking-normal mt-6 sm:mt-8 md:mt-10 rounded-2xl cursor-pointer inline-block mx-auto hover:bg-pink-600 hover:shadow-lg hover:scale-105 transition-transform transition-colors duration-300">
-    Explore Now
-  </button>
+          <button className="bg-pink-500 px-5 sm:px-6 md:px-8 py-2.5 md:py-3 text-white text-sm sm:text-base md:text-lg tracking-normal mt-6 sm:mt-8 md:mt-10 rounded-2xl cursor-pointer inline-block mx-auto hover:bg-pink-600 hover:shadow-lg hover:scale-105 transition-transform transition-colors duration-300">
+          Explore Now
+        </button>
 </Link>
 
       </section>
-      <Aboutus />
+      <Aboutus showButton={true} />
      <section
   className="mt-10 px-4 animate-fade-in-up"
   aria-label="What We Do"

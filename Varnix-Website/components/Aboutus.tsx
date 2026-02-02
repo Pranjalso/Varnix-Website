@@ -1,7 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import Link from "next/link"; // Import Link for navigation
 
-const Aboutus = () => {
+const Aboutus = ({ showButton = false }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -48,9 +49,14 @@ const Aboutus = () => {
             brands in the digital-first world
           </p>
 
-          {/* <button className="bg-pink-500 px-5 py-2 text-white text-sm sm:text-base rounded-full mt-4 hover:bg-pink-600 transition">
-           View more
-          </button> */}
+          {/* Logic: Button only renders if showButton prop is true */}
+          {showButton && (
+            <Link href="/about-us"> 
+              <button className="bg-pink-500 px-5 py-2 text-white text-sm sm:text-base rounded-full mt-4 hover:bg-pink-600 transition">
+                View more
+              </button>
+            </Link>
+          )}
         </div>
 
         {/* RIGHT */}
@@ -66,7 +72,7 @@ const Aboutus = () => {
           </span>
 
           <p className="text-sm sm:text-base md:text-lg leading-relaxed text-gray-200">
-          Varnix is more than a marketing agency—we’re a collective of strategists, creators, and technologists turning brands into cultural forces. In an attention-driven world, we help brands capture interest, sustain relevance, and drive measurable growth through future-ready solutions. We don’t just market products—we build experiences, communities, and lasting impact.
+            Varnix is more than a marketing agency—we’re a collective of strategists, creators, and technologists turning brands into cultural forces. In an attention-driven world, we help brands capture interest, sustain relevance, and drive measurable growth through future-ready solutions. We don’t just market products—we build experiences, communities, and lasting impact.
           </p>
         </div>
       </div>
